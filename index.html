@@ -481,6 +481,96 @@
     .athlete-grid { grid-template-columns: 1fr 1fr; }
     .about-values { grid-template-columns: 1fr; }
   }
+
+  /* ========== PRIVACY ========== */
+  .privacy-block {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface2);
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+
+  .privacy-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .privacy-text {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ========== CRITERIA ========== */
+  .criteria-section {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .criteria-title {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 20px;
+  }
+
+  .criteria-pose-block {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .criteria-pose-block:last-child { border-bottom: none; }
+
+  .criteria-pose-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .criteria-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+  }
+
+  .criteria-section > .criteria-list {
+    padding: 16px 20px;
+  }
+
+  .criteria-list li {
+    font-size: 13px;
+    color: #C8C5BC;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .criteria-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dim);
+  }
+
+  .criteria-part {
+    color: var(--gold-light);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
 </style>
 </head>
 <body>
@@ -521,24 +611,50 @@
   const type   = params.get('type');
   const main   = document.getElementById('main-content');
 
-  const aboutBlock = `
-    <div class="about-section">
-      <div class="about-header">
-        <span class="about-header-logo">SQU<span>AD</span></span>
-      </div>
-      <div class="about-body">
-        <p class="about-concept">昨日の自分を超え続け、「健康的に」<br>理想の自分を目指すフィットネスチーム</p>
-        <p class="about-mission">SQUADは、仲間と共に健康的なボディメイクを追求するフィットネスコミュニティです。初心者から本気の挑戦者まで、一人ひとりの自己実現をサポートし、社会全体の健康意識向上に貢献することを目指しています。</p>
-        <div class="about-values">
-          <div class="value-item"><p class="value-label">Bulk</p><p class="value-desc">筋肉・知識・経験を日々積み重ね、進化する</p></div>
-          <div class="value-item"><p class="value-label">Wellness</p><p class="value-desc">健康的な体づくりと長期的な健康を追求する</p></div>
-          <div class="value-item"><p class="value-label">With</p><p class="value-desc">仲間と支え合い、専門家と連携する共同体</p></div>
-        </div>
-      </div>
+  const privacyBlock = `
+    <div class="privacy-block">
+      <p class="privacy-title">【個人情報の取り扱いについて】</p>
+      <p class="privacy-text">ご入力いただいた個人情報（氏名、メールアドレス等）は、本大会の運営、お問い合わせへの回答、および関連するイベントや製品に関する情報提供・ご案内のためにのみ利用いたします。法令に基づく場合を除き、ご本人の同意なく第三者に個人情報を提供することはありません。</p>
     </div>
-    <div class="purpose-section">
-      <p class="purpose-label">本大会について</p>
-      <p class="purpose-text">本大会は、ニュースキンの製品を活用し健康的にボディメイクを行うSQUADの理念のもと、「孤独な努力を共に」というミッションを体現し、価値観を共有するメンバーによるボディメイク大会として実施するものです。</p>
+  `;
+
+
+  const femaleCriteria = `
+    <div class="criteria-section">
+      <p class="criteria-title">審査基準</p>
+      <ul class="criteria-list">
+        <li>全体の調和がとれている</li>
+        <li>全体のプロポーションや姿勢が良い</li>
+        <li>魅力的な雰囲気（表情など）</li>
+        <li>ヘアスタイル・メイク・コスチュームのセンスが高い</li>
+        <li>優雅なウォーキング（足の運びや歩くペース、ウォーキング中の仕草）</li>
+        <li>各部位が引き締まっている</li>
+      </ul>
+    </div>
+  `;
+
+  const maleCriteria = `
+    <div class="criteria-section">
+      <p class="criteria-title">審査基準</p>
+      <div class="criteria-pose-block">
+        <p class="criteria-pose-label">フロントポーズ</p>
+        <ul class="criteria-list">
+          <li><span class="criteria-part">肩</span>肩の輪郭がはっきり出ている、形も丸く突出している</li>
+          <li><span class="criteria-part">胸</span>大胸筋上部が凹んでいない。全体的に分厚い</li>
+          <li><span class="criteria-part">腹</span>腹筋の割れがきれいに割れている</li>
+          <li><span class="criteria-part">Vシェイプ</span>ウエストの細さ、大胸筋と三角筋の発達のバランスで強く出ている。左右の広背筋の広がりが強く出ている</li>
+        </ul>
+      </div>
+      <div class="criteria-pose-block">
+        <p class="criteria-pose-label">バックポーズ</p>
+        <ul class="criteria-list">
+          <li><span class="criteria-part">背中の凹凸</span>背中の凹凸があり全体的に分厚い</li>
+          <li><span class="criteria-part">背中の広がり</span>背中の広がりが大きい、ウエストの少し上から広背筋の広がりが始まっている、大円筋が大きくボリュームがある</li>
+          <li><span class="criteria-part">肩</span>筋肉のサイズが大きく輪郭がはっきりしている、筋肉量も多く形がきれい</li>
+          <li><span class="criteria-part">脊柱起立筋</span>脊柱起立筋（真ん中）が分厚い、背骨のところの溝が深くなっている</li>
+          <li><span class="criteria-part">腕</span>腕が太く外側へ大きく張り出している、逆三角形ができる。腕が太く、カットが出ている</li>
+        </ul>
+      </div>
     </div>
   `;
 
@@ -557,11 +673,12 @@
     `).join('');
   }
 
-  function renderForm(athletes, label, divisionKey) {
+  function renderForm(athletes, label, divisionKey, criteria) {
     document.title = `SQUAD CLASSIC — ${label} 最終投票`;
     main.innerHTML = `
       <span class="type-badge">${label}</span>
-      ${aboutBlock}
+      ${privacyBlock}
+      ${criteria}
       <div class="notice">
         <p class="notice-title">投票について</p>
         <ul>
@@ -570,7 +687,7 @@
           <li>投票は送信後の変更・取り消しができません。</li>
         </ul>
       </div>
-      <form class="form-section" id="the-form" onsubmit="submitVote(event,\'${divisionKey}\')">
+      <form class="form-section" id="the-form" onsubmit="submitVote(event,'${divisionKey}')">
         <div class="field">
           <label>メールアドレス<span class="req">*</span></label>
           <input type="email" name="email" required placeholder="example@mail.com">
@@ -582,7 +699,7 @@
         <label class="agree-row">
           <input type="checkbox" name="agree" required>
           <span class="custom-check"></span>
-          <span class="agree-text">上記の注意事項を確認し、同意のうえ投票します。</span>
+          <span class="agree-text">上記の注意事項および個人情報の取り扱いに同意のうえ投票します。</span>
         </label>
         <button type="submit" class="submit-btn" id="submit-btn">投票を送信する</button>
         <div class="status-msg" id="status-msg"></div>
@@ -591,8 +708,8 @@
   }
 
   function render() {
-    if      (type === 'male')   renderForm(MALE_ATHLETES,   '男性部門', 'male');
-    else if (type === 'female') renderForm(FEMALE_ATHLETES, '女性部門', 'female');
+    if      (type === 'male')   renderForm(MALE_ATHLETES,   '男性部門', 'male',   maleCriteria);
+    else if (type === 'female') renderForm(FEMALE_ATHLETES, '女性部門', 'female', femaleCriteria);
     else renderError();
   }
 
